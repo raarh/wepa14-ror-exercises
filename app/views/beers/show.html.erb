@@ -15,8 +15,5 @@
   <% brewery = Brewery.find_by(id:@beer.brewery_id) %>
   <%= link_to brewery.name,brewery %>
 </p>
-<p>
-  <%= link_to 'List of breweries', breweries_path %>
-</p>
 <%= link_to 'Edit', edit_beer_path(@beer) %> |
 <%= link_to 'Back', beers_path %>
