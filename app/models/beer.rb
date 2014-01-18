@@ -4,7 +4,10 @@ class Beer < ActiveRecord::Base
 
 
   def average_rating
+   ratings.average 'score'
+  end
 
-  ratings.average 'score'
+  def to_s
+    "#{brewery.name} #{self.name}"
   end
 end

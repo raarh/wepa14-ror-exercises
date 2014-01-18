@@ -1,27 +1,26 @@
 class RatingsController < ApplicationController
-  before_action :set_ratings, only: [:show, :edit, :update, :destroy]
+  #before_action :set_ratings, only: [:show, :edit, :update, :destroy]
   def index
     @ratings = Rating.all
   end
   def show
   end
   def new
-    @ratings = Rating.new
+    @rating = Rating.new
+    @beers = Beer.all
   end
   def edit
   end
-
+  def create
+    Rating.create params.require(:rating).permit(:score, :beer_id)
+    redirect_to ratings_path
+  end
 
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_ratings
     @ratings = Rating.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def brewery_params
-    params.require(:brewery).permit(:name, :year)
   end
 
 end
