@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @user.username %></h1>
-<p> has made <%=pluralize(@user.ratings.count,'rating','ratings')%>, average <%= "#{@user.rating_average.round(1)}" %></p>
+<p> has made <%=pluralize(@user.ratings.count,'rating','ratings')%><%if @user.ratings.count >0 %>, average <%= "#{@user.rating_average.round(1)}" %> <%end%></p>
 
 <h2>Ratings</h2>
 <ul>
