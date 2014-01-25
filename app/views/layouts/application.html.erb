@@ -7,11 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="navibar">
+  <nav class="navibar">
     <%= link_to 'Breweries', breweries_path %>
     <%= link_to 'Beers', beers_path %>
     <%= link_to 'Ratings', ratings_path%>
-  </div>
+    <%= link_to 'Users' , users_path %>
+    |
+    <% if not current_user.nil? %>
+       <%= link_to current_user.username, user_path(current_user.id) %>
+       <%= link_to 'Rate a beer', new_rating_path %>
+       <%= link_to 'Signout', signout_path, :method => :delete %>
+    <% else %>
+       <%= link_to 'Signin', signin_path %>
+       <%= link_to 'Signup', signup_path %>
+    <% end %>
+
+  </nav>
 
 <%= yield %>
 
