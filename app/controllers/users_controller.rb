@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @beer_clubs = current_user.beer_clubs
 
   end
 

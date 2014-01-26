@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @user.username %></h1>
-<p> has made <%=pluralize(@user.ratings.count,'rating','ratings')%><%if @user.ratings.count >0 %>, average <%= "#{@user.rating_average.round(1)}" %> <%end%></p>
+<p> has made <%=pluralize(@user.ratings.count,'rating','ratings')%><%if @user.ratings.count >0 %>, average <%= "#{@user.rating_average.round(1)}" %> <%end%> <br />
+Member of : <% @beer_clubs.each do |club|%> <%= link_to club.name,club %> <%end %></p>
 
 <h2>Ratings</h2>
 <ul>

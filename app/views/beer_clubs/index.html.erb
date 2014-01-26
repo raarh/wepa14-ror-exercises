@@ -1,0 +1,14 @@
+<h1>List of beer clubs</h1>
+
+    <ul>
+    <% @beer_clubs.each do |beer_club| %>
+
+
+     <li><%= link_to beer_club.name, beer_club_path(beer_club) %>, <%= beer_club.city %></li>
+
+    <% end %>
+</ul>
+
+<br>
+
+<%= link_to 'New Beer club', new_beer_club_path %>
