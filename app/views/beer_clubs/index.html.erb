@@ -1,5 +1,7 @@
-<h1>List of beer clubs</h1>
-
+<nav>
+  <%= link_to 'New Beer club', new_beer_club_path %>
+</nav>
+<h2>List of beer clubs</h2>
     <ul>
     <% @beer_clubs.each do |beer_club| %>
 
@@ -11,4 +13,3 @@
 
 <br>
 
-<%= link_to 'New Beer club', new_beer_club_path %>
