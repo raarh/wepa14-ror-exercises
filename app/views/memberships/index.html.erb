@@ -13,12 +13,13 @@
 
   <tbody>
     <% @memberships.each do |membership| %>
+        <% user = User.find_by(id:membership.user_id) %>
+        <% beerclub = BeerClub.find_by(id:membership.beer_club_id)%>
       <tr>
-        <td><%= BeerClub.find_by(id:membership.beer_club_id).name%></td>
-        <td><%= User.find_by(id:membership.user_id).username %></td>
-        <td><%= link_to 'Show', membership %></td>
-        <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
-        <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= beerclub.name%></td>
+        <td><%= user.username %></td>
+        <td><%= link_to 'Show', beer_club_path(beerclub) %></td>
+        <td><% if user == current_user %><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %> <%end%></td>
       </tr>
     <% end %>
   </tbody>

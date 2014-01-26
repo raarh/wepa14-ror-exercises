@@ -2,14 +2,17 @@
 
 <h1><%= @user.username %></h1>
 <p> has made <%=pluralize(@user.ratings.count,'rating','ratings')%><%if @user.ratings.count >0 %>, average <%= "#{@user.rating_average.round(1)}" %> <%end%> <br />
-Member of <% @beer_clubs.each do |club|%> <%= link_to club.name,club %> <%end %></p>
-
+Member of <% @beer_clubs.each do |club|%> <%= link_to club.name,club %> <%end %> <br />
+<% if @user == current_user %>
+      <%= link_to 'Edit', edit_user_path(@user) %>
+      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%end%>
+</p>
 <h2>Ratings</h2>
 <ul>
 <% @user.ratings.each do |rating| %>
-    <li><%= rating.beer.name %> <%= link_to 'delete', rating, :method => :delete, data: { confirm: 'Are you sure?' } %></li>
+    <li><%= rating.beer.name %>  <% if @user == current_user %>
+          <%= link_to 'delete', rating, :method => :delete, data: { confirm: 'Are you sure?' } %> <%end%></li>
 
 <%end %>
 </ul>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
