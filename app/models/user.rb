@@ -1,9 +1,8 @@
 class User < ActiveRecord::Base
   include RatingAverage
-  validates_uniqueness_of :username
-  validates_length_of :username, minimum: 3
-  validates_length_of :password, minimum: 3
-  validates_length_of :username, maximum: 15
+  validates :username, uniqueness: true
+  validates :username, length: { minimum: 3, maximum:15}
+  validates :password, length: { minimum: 3 }
   validates :password, format: {with: /\d/, message: "At least one number"}
   validates :password, format: {with: /[A-Z]/, message: "At least one upper-case letter"}
   has_many :memberships, dependent: :destroy
