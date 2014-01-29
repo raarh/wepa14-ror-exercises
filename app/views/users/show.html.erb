@@ -11,7 +11,7 @@ Member of <% @beer_clubs.each do |club|%> <%= link_to club.name,club %> <%end %>
 <h2>Ratings</h2>
 <ul>
 <% @user.ratings.each do |rating| %>
-    <li><%= rating.beer.name %>  <% if @user == current_user %>
+    <li><%= rating %>  <% if @user == current_user %>
           <%= link_to 'delete', rating, :method => :delete, data: { confirm: 'Are you sure?' } %> <%end%></li>
 
 <%end %>
