@@ -12,4 +12,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  def favorite_beer
+
+  end
 end
