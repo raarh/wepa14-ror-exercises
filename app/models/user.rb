@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def favorite_beer
-
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
   end
 end
