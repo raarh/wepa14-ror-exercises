@@ -9,3 +9,5 @@ Kurssin [Web-palvelinohjelmointi Ruby on Rails](http://www.cs.helsinki.fi/course
 Tehtävät:  1,2,3,4,5,6,7,8,9,10,11  
 ### Viikko 2 ###
 Tehtävät:  1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+### Viikko 3 ###
+Tehtävät:  1,2,3,4,5,6,7,8,9,10,11,12,13,14
