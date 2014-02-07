@@ -70,10 +70,39 @@ describe User do
       expect(user.favorite_beer).to eq(best)
     end
   end
+  describe "favorite style" do
+    let(:user){FactoryGirl.create(:user) }
+    let(:brewery ){FactoryGirl.create(:brewery ) }
+
+    it "has method for determining one" do
+      user.should respond_to :favorite_style
+    end
+    it "without ratings does not have one" do
+      expect(user.favorite_style).to eq(nil)
+    end
+    it "is the only rated if only one rating" do
+      create_beer_with_style_and_rating("lager","olut",user,brewery,25)
+
+      user.favorite_style.should == "lager"
+    end
+    it "is the one with highest rating if several rated" do
+      create_beer_with_style_and_rating("lager","Iso 3",user,brewery,10);
+      create_beer_with_style_and_rating("lager","Tiukka 4",user,brewery,25);
+      create_beer_with_style_and_rating("Weizen","Lempeä vehnä",user,brewery,30);
+      user.favorite_style.should == "lager"
+      create_beer_with_style_and_rating("Weizen","Lempeä vehnä",user,brewery,30);
+      user.favorite_style.should == "Weizen"
+    end
+  end
 end
 
 def create_beer_with_rating(score, user)
   beer = FactoryGirl.create(:beer)
+  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+  beer
+end
+def create_beer_with_style_and_rating(style,name,user,brewery, score)
+  beer = FactoryGirl.create(:beer,name:name, brewery_id:brewery.id,style:style)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end

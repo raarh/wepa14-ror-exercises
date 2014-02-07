@@ -8,7 +8,7 @@ describe Beer do
     expect(beer).to be_valid
     beer = Beer.create name:"Porter"
     expect(beer).not_to be_valid
-    beer = Beer.create style:"Porter"
+    beer = Beer.create name:"Porter"
     expect(beer).not_to be_valid
     expect(Beer .count).to eq(1)
   end

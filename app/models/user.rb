@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer
   end
+  def favorite_style
+    return nil if ratings.empty?
+      beers.group(:style).order("sum_score desc" ).sum(:score).keys[0]
+  end
 end
