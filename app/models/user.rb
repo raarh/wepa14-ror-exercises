@@ -22,6 +22,6 @@ class User < ActiveRecord::Base
   end
   def favorite_brewery
     return nil if ratings.empty?
-    beers.group(:brewery).order("count_brewery_id desc").count("brewery_id").keys[0]
+    beers.group(:brewery).order("sum_score desc" ).sum(:score).keys[0]
   end
 end
