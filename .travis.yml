@@ -8,3 +8,8 @@ script:
  - RAILS_ENV=test bundle exec rake db:migrate --trace
  - bundle exec rake db:test:prepare
  - bundle exec rspec -fd spec/
+
+deploy:
+  provider: heroku
+  api_key: "4934e4d6-07ed-4261-be96-af9ee040f7ec"
+  app: damp-wave-2351
