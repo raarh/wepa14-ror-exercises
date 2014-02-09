@@ -17,5 +17,4 @@ class ApplicationController < ActionController::Base
     def ensure_that_signed_in
       redirect_to signin_path, notice:'you should be signed in' if current_user.nil?
     end
-  end
-
+end

@@ -6,7 +6,7 @@
     <% @beer_clubs.each do |beer_club| %>
 
 
-     <li><%= link_to beer_club.name, beer_club_path(beer_club) %>, <%= beer_club.city %></li>
+     <li><%= link_to beer_club.name, beer_club_path(beer_club) %>, <%= beer_club.city %><%= link_to 'Destroy',beer_club, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 
     <% end %>
 </ul>
