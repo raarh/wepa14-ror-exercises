@@ -25,5 +25,10 @@ FactoryGirl.define do
     brewery
     style "Lager"
   end
+  factory :beerclub, class: BeerClub do
+    name "Boolikerho"
+    founded 1990
+    city "Helsinki"
+  end
 end
 

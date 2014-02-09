@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "User page" do
+describe "User (page)" do
   before :each do
     @user = FactoryGirl.create :user
     @brewery = FactoryGirl.create :brewery, name:"Koff"
@@ -15,6 +15,16 @@ describe "User page" do
 
       expect(page).to have_content 'Welcome back!'
       expect(page).to have_content 'Pekka'
+    end
+    it "can join to a club" do
+      b= FactoryGirl.create :beerclub, name:"Testi"
+      sign_in(username:"Pekka", password:"Foobar1")
+      visit new_membership_path
+      select("Testi", from:"membership[beer_club_id]")
+      expect{
+        click_button "Create Membership"
+      }.to change{Membership.count}.from(0).to(1)
+
     end
   end
   it "is redirected back to signin form if wrong credentials given" do
