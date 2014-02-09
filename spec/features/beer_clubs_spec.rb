@@ -8,6 +8,7 @@ describe "Beer club" do
 
 
   it " is created, only if it is named ja it has city" do
+    sign_in(username:"Pekka", password:"Foobar1")
     alku = BeerClub.count
     visit new_beer_club_path
     fill_in('beer_club[name]', with:'Kerhotesti')
@@ -20,7 +21,7 @@ describe "Beer club" do
 
   end
   it "Unnamed club returns an error" do
-
+    sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_club_path
     fill_in('beer_club[founded]', with:1990)
     fill_in('beer_club[city]', with:'Tampere')
@@ -32,6 +33,7 @@ describe "Beer club" do
 
   end
   it "must have year in founded" do
+    sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_club_path
     fill_in('beer_club[name]', with:'Kerhotesti 2')
     fill_in('beer_club[city]', with:'Tampere')
@@ -53,7 +55,7 @@ describe "Beer club" do
 
 end
     it "must founded with a number" do
-
+      sign_in(username:"Pekka", password:"Foobar1")
       visit new_beer_club_path
       fill_in('beer_club[name]', with:'Kerhotesti 3')
       fill_in('beer_club[city]', with:'Tampere')

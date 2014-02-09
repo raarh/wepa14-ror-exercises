@@ -8,6 +8,7 @@ describe "Beer page" do
 
 
   it "Beer is created, only if it is named" do
+    sign_in(username:"Pekka", password:"Foobar1")
 
     visit new_beer_path
     fill_in('beer[name]', with:'Iso 3')
@@ -20,7 +21,7 @@ describe "Beer page" do
 
   end
   it "Unnamed beer returns an error" do
-
+    sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_path
     select('Lager', from:'beer[style]')
     select('Koff', from:'beer[brewery_id]')
