@@ -1,15 +1,15 @@
 language: ruby
-
 rvm:
- - 2.0.0
-
+- 2.0.0
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
-
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
 deploy:
   provider: heroku
-  api_key: "4934e4d6-07ed-4261-be96-af9ee040f7ec"
+  api_key:
+    secure: gzWf4Z7w7NSy4006xIlb+aIqIxIcTQfzRhttw38gAv8whPfVbRroUmOc5+SXbcfFh5N9pE09ruTA+LswcZ55hhMFd/m1S3Js6FxmEgT1y4hZUBR/o6XC57ygweD3FqSiY8UEjpjeGHYu5xvMwmj6XueyxuCX66OIddMo69Nd4d4=
   app: damp-wave-2351
+  on:
+    repo: raarh/ratebeer
