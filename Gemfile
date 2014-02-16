@@ -61,3 +61,5 @@ group :production do
 end
 
 gem 'httparty'
+gem 'dalli'
+gem 'memcachier'
