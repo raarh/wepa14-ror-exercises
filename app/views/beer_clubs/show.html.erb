@@ -5,9 +5,6 @@
 <i>Founded <%= @beer_club.founded %> </i>
 </p>
 <p>
-  Number of members <%= @beer_club.users.count %>.
-</p>
-<p>
   <h3>Members</h3>
     <ul>
   <% @beer_club.users.each do |user| %>
@@ -15,5 +12,8 @@
   <% end %>
       </ul>
 </p>
+
+<%= link_to "Edit",edit_beer_club_path %>
+<%= link_to 'Destroy the club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 
