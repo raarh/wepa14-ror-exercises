@@ -9,8 +9,6 @@ Bundler.require(:default, Rails.env)
 module Ratebeer
   class Application < Rails::Application
     config.autoload_paths += Dir["#{config.root}/lib/"]
-
-    Settings.beermapping_apikey  =  "184cb69a339609dca675cdfa85ddc0ec"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
