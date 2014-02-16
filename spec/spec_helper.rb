@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'simplecov'
+require 'webmock/rspec'
 SimpleCov.start
 I18n.enforce_available_locales = false
 # Requires supporting ruby files with custom matchers and macros, etc,
