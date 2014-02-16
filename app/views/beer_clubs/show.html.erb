@@ -5,6 +5,14 @@
 <i>Founded <%= @beer_club.founded %> </i>
 </p>
 <p>
+<% if current_user %>
+  <% unless @beer_club.users.include? current_user%>
+      <%= form_for(@membership) do |f| %>
+          <%= f.hidden_field :beer_club_id %>
+          <%= f.submit value:"join the club" %>
+      <% end %>
+    <%end%>
+  <%end%>
   <h3>Members</h3>
     <ul>
   <% @beer_club.users.each do |user| %>
