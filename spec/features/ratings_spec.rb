@@ -4,8 +4,6 @@ include OwnTestHelper
 
 describe "Rating page" do
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
-  let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery }
-  let!(:beer2) { FactoryGirl.create :beer, name:"Karhu", brewery:brewery }
   let!(:user) { FactoryGirl.create :user }
 
   before :each do
@@ -13,6 +11,8 @@ describe "Rating page" do
   end
 
   it "when given, is registered to the beer and user who is signed in" do
+    create_material
+    beer1 = Beer.first
     visit new_rating_path
     select('iso 3', from:'rating[beer_id]')
     fill_in('rating[score]', with:'15')
@@ -26,6 +26,9 @@ describe "Rating page" do
     expect(beer1.rating_average).to eq(15.0)
   end
   it "lists ratings and tells number of ratings" do
+    create_material
+    beer1 = Beer.first
+    beer2 = Beer.last
     visit ratings_path
     expect(page).to have_content "Number of ratings 0"
     FactoryGirl.create(:rating, score:25, beer:beer1, user:user)
@@ -38,4 +41,11 @@ describe "Rating page" do
     expect(page).to have_content "iso 3, 25 Pekka"
     expect(page).to have_content "Karhu, 21 Pekka"
   end
+end
+
+def create_material
+  style = Style.create style:"Lager"
+  Beer.create(name:"iso 3", brewery_id:brewery.id,style_id:style.id)
+  Beer.create(name:"Karhu", brewery_id:brewery.id,style_id:style.id)
+
 end

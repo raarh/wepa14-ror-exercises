@@ -8,11 +8,12 @@ describe "Beer page" do
 
 
   it "Beer is created, only if it is named" do
+    #Style.create style:"Lager"
     sign_in(username:"Pekka", password:"Foobar1")
 
     visit new_beer_path
-    fill_in('beer[name]', with:'Iso 3')
-    select('Lager', from:'beer[style]')
+    fill_in('beer[name]', with:'Iso 4A')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
 
     expect{
@@ -21,9 +22,10 @@ describe "Beer page" do
 
   end
   it "Unnamed beer returns an error" do
+    Style.create style:"Lager"
     sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_path
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
 
     expect{

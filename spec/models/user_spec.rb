@@ -59,13 +59,21 @@ describe User do
       expect(user.favorite_beer).to eq(nil)
     end
     it "is the only rated if only one rating" do
-      beer = create_beer_with_rating(10, user)
+      lager = Style.create style:"Weizen"
+      brewery = FactoryGirl.create(:brewery )
+      beer = create_beer_with_style_and_rating(lager,"Iso 3",user,brewery,25);
 
       expect(user.favorite_beer).to eq(beer)
     end
     it "is the one with highest rating if several rated" do
-      create_beers_with_ratings(10, 20, 15, 7, 9, user)
-      best = create_beer_with_rating(25, user)
+      vehna = Style.create style:"Weizen"
+      brewery = FactoryGirl.create(:brewery )
+
+      create_beer_with_style_and_rating(vehna,"Iso 1",user,brewery,2);
+      create_beer_with_style_and_rating(vehna,"Iso 2",user,brewery,20);
+      create_beer_with_style_and_rating(vehna,"Iso 4",user,brewery,22);
+
+      best =       create_beer_with_style_and_rating(vehna,"Iso 3",user,brewery,25);
 
       expect(user.favorite_beer).to eq(best)
     end
@@ -81,31 +89,38 @@ describe User do
       expect(user.favorite_style).to eq(nil)
     end
     it "is the only rated if only one rating" do
-      create_beer_with_style_and_rating("lager","olut",user,brewery,25)
+      lager = Style.create style:"Lager"
+      create_beer_with_style_and_rating(lager,"olut",user,brewery,25)
 
-      user.favorite_style.should == "lager"
+      user.favorite_style.id.should == lager.id
     end
     it "is the one with highest rating if several rated" do
-      create_beer_with_style_and_rating("lager","Iso 3",user,brewery,10);
-      create_beer_with_style_and_rating("lager","Tiukka 4",user,brewery,25);
-      create_beer_with_style_and_rating("Weizen","Lempeä vehnä",user,brewery,30);
-      user.favorite_style.should == "lager"
-      create_beer_with_style_and_rating("Weizen","Lempeä vehnä",user,brewery,30);
-      user.favorite_style.should == "Weizen"
+      lager = Style.create style:"Lager"
+      vehna = Style.create style:"Weizen"
+
+      create_beer_with_style_and_rating(lager,"Iso 3",user,brewery,10);
+      create_beer_with_style_and_rating(lager,"Tiukka 4",user,brewery,25);
+
+      create_beer_with_style_and_rating(vehna,"Lempeä vehnä",user,brewery,30);
+      user.favorite_style.id.should == lager.id
+      create_beer_with_style_and_rating(vehna,"Lempeä vehnä",user,brewery,30);
+      user.favorite_style.id.should == vehna.id
     end
   end
 end
 
 def create_beer_with_rating(score, user)
-  beer = FactoryGirl.create(:beer)
+  style = Style.where(style:"Lager")
+  if style.nil?
+    style = Style.create style:"Lager"
+  end
+  name = "#{score}olut"
+  brewery = FactoryGirl.create(:brewery)
+  beer = Beer.create(name:name, brewery_id:brewery.id,style_id:style.id)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end
-def create_beer_with_style_and_rating(style,name,user,brewery, score)
-  beer = FactoryGirl.create(:beer,name:name, brewery_id:brewery.id,style:style)
-  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
-  beer
-end
+
 def create_beers_with_ratings(*scores, user)
   scores.each do |score|
     create_beer_with_rating(score, user)
