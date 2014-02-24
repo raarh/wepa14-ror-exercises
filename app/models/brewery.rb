@@ -8,6 +8,10 @@ class Brewery < ActiveRecord::Base
   validates :year, numericality: { only_integer: true }
   validates_with YearValidator
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
 
-
+  def to_s
+    self.name
+  end
 end
