@@ -5,15 +5,30 @@
 <%if @user.ratings.count >0 %> Favorite brewery: <%= @user.favorite_brewery.name %>. <br /> Favorite style: <%= @user.favorite_style.style%><br /> <%end%>
 Member of <% @beer_clubs.each do |club|%> <%= link_to club.name,club %> <%end %> <br />
 <% if @user == current_user %>
-      <%= link_to 'Edit', edit_user_path(@user) %>
-      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', edit_user_path(@user) ,class:'btn btn-primary' %>
+      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger'%>
     <%end%>
 </p>
 <h2>Ratings</h2>
-<ul>
+<table class="table">
+  <thead>
+  <tr>
+    <th><%= link_to 'Beer', beers_path(order:"name") %></th>
+    <th><%= link_to 'Score', beers_path(order:"style") %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
 <% @user.ratings.each do |rating| %>
-    <li><%= rating %>  <% if @user == current_user %>
-          <%= link_to 'delete', rating, :method => :delete, data: { confirm: 'Are you sure?' } %> <%end%></li>
-
-<%end %>
-</ul>
+      <tr>
+        <td><%= rating.beer %></td>
+        <td><%= rating.score %></td>
+          <% if @user == current_user %>
+            <td><%= link_to 'delete', rating, :method => :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
+          <%end%>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
