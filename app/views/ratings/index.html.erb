@@ -2,9 +2,11 @@
 <p>Number of ratings <%=@ratings.count %> <br />
 </p>
 <h3>Top beers</h3>
-<%= render 'top_list', toplist: @top_beers%>
+<%= render 'top_list', toplist: @ratings.top_beers%>
 <h3>Top breweries</h3>
-<%= render 'top_list', toplist: @top_breweries%>
+<%= render 'top_list', toplist: @ratings.top_breweries%>
+<h3>Top styles</h3>
+<%= render 'top_list', toplist: @ratings.top_styles%>
 <h3>Top raters</h3>
 <table class="table table-hover">
   <thead>
@@ -18,7 +20,7 @@
   </thead>
   <tbody>
   <tr>
-  <% @top_raters.each do |user,count| %>
+  <% @ratings.top_raters.each do |user,count| %>
      <td><%= link_to user.username, user%></td>
      <td><%= link_to user.favorite_beer, user.favorite_beer%></td>
      <td><%= link_to user.favorite_style.style, user.favorite_style%></td>
