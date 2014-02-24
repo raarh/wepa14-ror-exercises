@@ -8,6 +8,7 @@ Ratebeer::Application.routes.draw do
   resources :users
 
   resources :beers
+  get 'beerlist', to:'beers#list'
 
   resources :breweries
 
