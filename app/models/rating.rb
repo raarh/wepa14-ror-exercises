@@ -23,4 +23,13 @@ class Rating < ActiveRecord::Base
     end
     finalhash
   end
+  def self.top_styles(n=3)
+    finalhash = {}
+    Rating.joins(beer: :style).group("styles.id").order("average_score desc").limit(3).average(:score).each do |styleID,avg|
+      newHash ={Style.find_by(id:styleID) => avg}
+      finalhash.merge!(newHash)
+    end
+      finalhash
+  end
 end
+
