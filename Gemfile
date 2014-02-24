@@ -49,6 +49,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'byebug'
   gem 'rails_layout'
+  gem 'rack-mini-profiler'
 end
 group :test do
   gem 'factory_girl_rails'
