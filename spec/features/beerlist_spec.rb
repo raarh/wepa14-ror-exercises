@@ -36,4 +36,20 @@ describe "Beerlist page" do
     find('table').find('tr:nth-child(3)').should have_content('Lechte Weisse')
     find('table').find('tr:nth-child(4)').should have_content('Nikolai')
   end
+  it "clicking \"brewery\" orders list by brewery", js:true do
+    visit beerlist_path
+    click_link('Brewery')
+    find('table').find('tr:nth-child(2)').should have_content('Ayinger')
+    find('table').find('tr:nth-child(3)').should have_content('Koff')
+    find('table').find('tr:nth-child(4)').should have_content('Schlenkerla')
+  end
+  it "clicking \"names\" orders list by name", js:true do
+    visit beerlist_path
+    click_link('Brewery')
+    click_link('Name')
+    find('table').find('tr:nth-child(2)').should have_content('Fastenbier')
+    find('table').find('tr:nth-child(3)').should have_content('Lechte Weisse')
+    find('table').find('tr:nth-child(4)').should have_content('Nikolai')
+
+  end
 end
