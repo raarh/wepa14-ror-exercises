@@ -65,3 +65,4 @@ gem 'httparty'
 gem 'dalli'
 gem 'memcachier'
 gem "rails-settings-cached", "0.3.1"
+gem 'jquery-turbolinks'
