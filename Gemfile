@@ -48,6 +48,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.14.1'
   gem 'byebug'
+  gem 'rails_layout'
 end
 group :test do
   gem 'factory_girl_rails'
@@ -68,3 +69,4 @@ gem 'dalli'
 gem 'memcachier'
 gem "rails-settings-cached", "0.3.1"
 gem 'jquery-turbolinks'
+gem 'bootstrap-sass'
