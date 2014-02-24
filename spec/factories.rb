@@ -17,7 +17,7 @@ FactoryGirl.define do
     year 1900
   end
 
-  factory :brewery2 do
+  factory :brewery2, class: Brewery do
     name "anonymous Fin"
     year 1910
   end
@@ -25,6 +25,10 @@ FactoryGirl.define do
     name "Boolikerho"
     founded 1990
     city "Helsinki"
+  end
+  factory :style do
+    style "anonymous"
+    description "a well known style"
   end
 end
 
