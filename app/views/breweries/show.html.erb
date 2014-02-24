@@ -1,10 +1,10 @@
-<p>
-  <h2><%= @brewery.name %>
+<% cache @brewery do %>
+<h2><%= @brewery.name %>
     <% if not @brewery.active  %>
         <span class="label label-info">retired</span>
     <% end %></h2>
   <i>Established at <%= @brewery.year %> </i>
-</p>
+
 <p>
   Number of beers <%= @brewery.beers.count %>
 </p>
@@ -22,6 +22,7 @@
   <% else %>
    Has <%=pluralize(@brewery.ratings.count,'rating','ratings')%>, average <%= @brewery.rating_average.round 1 %>
 
+  <% end %>
   <% end %>
 </p>
 <%= edit_and_destroy_buttons(@brewery) %>
