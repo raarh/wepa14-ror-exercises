@@ -17,7 +17,8 @@ class BeersController < ApplicationController
     end
   end
   def list
-
+  end
+  def nglist
   end
   # GET /beers/1
   # GET /beers/1.json
@@ -31,6 +32,7 @@ class BeersController < ApplicationController
   def new
 
     @beer = Beer.new
+    @beer.style = Style.new
   end
 
   # GET /beers/1/edit

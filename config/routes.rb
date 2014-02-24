@@ -9,8 +9,10 @@ Ratebeer::Application.routes.draw do
 
   resources :beers
   get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
 
   resources :breweries
+  get 'brewerylist', to:'breweries#list'
 
   resources :ratings, :only => [:index, :new, :create,:destroy]
   resources :sessions, :only => [:new, :create, :destroy]
