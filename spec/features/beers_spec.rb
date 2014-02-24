@@ -1,38 +1,32 @@
 require 'spec_helper'
+
 include OwnTestHelper
 
+describe "Beer" do
+  let!(:brewery) { FactoryGirl.create(:brewery, name:"Koff") }
+  let!(:style) { FactoryGirl.create(:style) }
 
-describe "Beer page" do
-  let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
-  let!(:user) { FactoryGirl.create :user }
-
-
-  it "Beer is created, only if it is named" do
-    #Style.create style:"Lager"
+  before :each do
+    FactoryGirl.create :user
     sign_in(username:"Pekka", password:"Foobar1")
-
-    visit new_beer_path
-    fill_in('beer[name]', with:'Iso 4A')
-    select('Lager', from:'beer[style_id]')
-    select('Koff', from:'beer[brewery_id]')
-
-    expect{
-      click_button "Create Beer"
-    }.to change{Beer.count}.from(0).to(1)
-
   end
-  it "Unnamed beer returns an error" do
-    Style.create style:"Lager"
-    sign_in(username:"Pekka", password:"Foobar1")
+
+  it "is created when a valid name given" do
     visit new_beer_path
-    select('Lager', from:'beer[style_id]')
-    select('Koff', from:'beer[brewery_id]')
+    fill_in('beer_name', with:'Arrogant Bastard Ale')
 
     expect{
-      click_button "Create Beer"
-    }.not_to change{Beer.count}
+      click_button('Create Beer')
+    }.to change{Beer.count}.by(1)
+  end
+
+  it "is not created with invalid name" do
+    visit new_beer_path
+
+    expect{
+      click_button('Create Beer')
+    }.to change{Beer.count}.by(0)
     expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "New beer"
   end
-
-
 end
