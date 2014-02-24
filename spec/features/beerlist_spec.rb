@@ -13,7 +13,7 @@ describe "Beerlist page" do
     @beer3 = FactoryGirl.create(:beer, name:"Lechte Weisse", brewery:@brewery3, style:@style3)
   end
 
-  it "shows one known beer" do
+  it "shows one known beer", js:true do
     visit beerlist_path
     save_and_open_page
     expect(page).to have_content "Nikolai"
