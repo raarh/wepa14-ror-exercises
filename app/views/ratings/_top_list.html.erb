@@ -10,7 +10,7 @@
   <% toplist.each do |key,average| %>
       <tr>
         <td><%= link_to key,key %></td>
-        <td><%= average %></td>
+        <td><%= round(average) %></td>
       </tr>
   <% end %>
   </tbody>
