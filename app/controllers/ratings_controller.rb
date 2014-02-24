@@ -2,6 +2,10 @@ class RatingsController < ApplicationController
   #before_action :set_ratings, only: [:show, :edit, :update, :destroy]
   def index
     @ratings = Rating.all
+    @recent = Rating.recent
+    @top_raters =  @ratings.top_raters
+    @top_beers = @ratings.top_beers
+    @top_breweries =@ratings.top_breweries
   end
   def show
   end
